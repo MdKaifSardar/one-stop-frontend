@@ -43,7 +43,7 @@ const AuthState = (props) => {
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
     const { email, password } = credentials;
-    const response = await fetch("http://localhost:8080/api/v1/auth/login", {
+    const response = await fetch("/api/v1/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const AuthState = (props) => {
   const handleSubmitSignup = async (e) => {
     e.preventDefault();
     const { name, email, password, address, phone, answer } = credentials;
-    const response = await fetch("http://localhost:8080/api/v1/auth/register", {
+    const response = await fetch("/api/v1/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -111,7 +111,7 @@ const AuthState = (props) => {
   const handleSubmitUpdatePass = async (e) => {
     e.preventDefault();
     const { email, password, answer } = credentials;
-    const response = await fetch("http://localhost:8080/api/v1/auth/forgot-password", {
+    const response = await fetch("/api/v1/auth/forgot-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

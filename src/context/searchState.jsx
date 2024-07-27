@@ -18,7 +18,7 @@ const SearchState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/search-product/${keyword}?page=${
+        `/api/v1/product/search-product/${keyword}?page=${
           currentPage - 1
         }&limit=${limit}`,
         {
@@ -51,7 +51,7 @@ const SearchState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/search-product/${keyword}?page=${
+        `/api/v1/product/search-product/${keyword}?page=${
           currentPage + 1
         }&limit=${limit}`,
         {
@@ -81,7 +81,7 @@ const SearchState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/search-product/${keyword}?page=1&limit=${limit}`,
+        `/api/v1/product/search-product/${keyword}?page=1&limit=${limit}`,
         {
           method: "POST",
           headers: {
@@ -110,7 +110,7 @@ const SearchState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/search-product/${keyword}?page=1&limit=${limit}`,
+        `/api/v1/product/search-product/${keyword}?page=1&limit=${limit}`,
         {
           method: "POST",
           headers: {

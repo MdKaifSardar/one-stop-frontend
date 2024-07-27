@@ -48,7 +48,7 @@ const ProductState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/similar-products/${pId}/${cId}`,
+        `/api/v1/product/similar-products/${pId}/${cId}`,
         {
           method: "GET",
         }
@@ -69,7 +69,7 @@ const ProductState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/single-product/${slug}`,
+        `/api/v1/product/single-product/${slug}`,
         {
           method: "GET",
         }
@@ -92,7 +92,7 @@ const ProductState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/products-by-page?page=1&limit=${limit}`,
+        `/api/v1/product/products-by-page?page=1&limit=${limit}`,
         {
           method: "GET",
         }
@@ -116,7 +116,7 @@ const ProductState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        "http://localhost:8080/api/v1/product/all-product",
+        "/api/v1/product/all-product",
         {
           method: "GET",
         }
@@ -145,7 +145,7 @@ const ProductState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/products-by-page?page=${2}&limit=${limit}`,
+        `/api/v1/product/products-by-page?page=${2}&limit=${limit}`,
         {
           method: "GET",
         }
@@ -173,7 +173,7 @@ const ProductState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/products-by-page?page=${1}&limit=${limit}`,
+        `/api/v1/product/products-by-page?page=${1}&limit=${limit}`,
         {
           method: "GET",
         }
@@ -227,7 +227,7 @@ const ProductState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/update-product/${selectedProId}`,
+        `/api/v1/product/update-product/${selectedProId}`,
         {
           method: "PUT",
           body: productData,
@@ -257,7 +257,7 @@ const ProductState = (props) => {
       if (answer !== "yes") return;
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/delete-product/${productId}`,
+        `/api/v1/product/delete-product/${productId}`,
         {
           method: "DELETE",
         }
@@ -298,7 +298,7 @@ const ProductState = (props) => {
   const showAllCategory = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/category/all-category",
+        "/api/v1/category/all-category",
         {
           method: "GET",
         }
@@ -326,7 +326,7 @@ const ProductState = (props) => {
     productData.append("userId", userId);
     try {
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/create-product`,
+        `/api/v1/product/create-product`,
         {
           method: "POST",
           headers: {

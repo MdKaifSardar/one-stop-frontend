@@ -29,7 +29,7 @@ const CategoryState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/category/create-category`,
+        `/api/v1/category/create-category`,
         {
           method: "POST",
           headers: {
@@ -56,7 +56,7 @@ const CategoryState = (props) => {
   const showAllCategory = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8080/api/v1/category/all-category",
+        "/api/v1/category/all-category",
         {
           method: "GET",
         }
@@ -75,7 +75,7 @@ const CategoryState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/category/update-category/${selectedCatId}`,
+        `/api/v1/category/update-category/${selectedCatId}`,
         {
           method: "PUT",
           headers: {
@@ -106,7 +106,7 @@ const CategoryState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/category/delete-category/${categoryId}`,
+        `/api/v1/category/delete-category/${categoryId}`,
         {
           method: "DELETE",
           headers: {

@@ -28,7 +28,7 @@ const FilterState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8080/api/v1/product/filter-product`,
+        `/api/v1/product/filter-product`,
         {
           method: "POST",
           headers: {
