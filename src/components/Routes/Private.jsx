@@ -9,7 +9,7 @@ const PrivateRoute = () => {
 
   const authCheck = async () => {
       const response = await fetch(
-        "http://localhost:8080/api/v1/auth/user-auth",
+        "/api/v1/auth/user-auth",
         {
           method: "GET",
           headers: {

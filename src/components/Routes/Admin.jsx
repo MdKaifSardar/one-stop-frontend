@@ -12,7 +12,7 @@ const AdminRoute = () => {
     const userData = new FormData();
     userData.append("userId", userId);
       const response = await fetch(
-        "http://localhost:8080/api/v1/auth/admin-auth",
+        "/api/v1/auth/admin-auth",
         {
           method: "POST",
           headers: {
