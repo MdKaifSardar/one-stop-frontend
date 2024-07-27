@@ -62,6 +62,7 @@ const ProductState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("something went wrong", "danger");
     }
   };
@@ -84,6 +85,7 @@ const ProductState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("Something went wrong while viewing the product");
     }
   };
@@ -107,6 +109,7 @@ const ProductState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("Error while loading page");
     }
   };
@@ -161,6 +164,7 @@ const ProductState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("Error while loading new page");
     }
   };
@@ -189,6 +193,7 @@ const ProductState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("Error while loading new page");
     }
   };
@@ -307,6 +312,7 @@ const ProductState = (props) => {
       setCategories(json.category);
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("danger", "Somethin wrong happened");
     }
   };
@@ -325,6 +331,7 @@ const ProductState = (props) => {
     productData.append("price", price);
     productData.append("userId", userId);
     try {
+      props.setIsLoading(true);
       const response = await fetch(
         `/api/v1/product/create-product`,
         {

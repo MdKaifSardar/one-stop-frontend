@@ -65,6 +65,7 @@ const CategoryState = (props) => {
       setCategories(json.category);
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("danger", "Somethin wrong happened");
     }
   };
@@ -95,6 +96,7 @@ const CategoryState = (props) => {
       showAllCategory();
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert(
         "danger",
         "Sometihng wrong happened while updating category"

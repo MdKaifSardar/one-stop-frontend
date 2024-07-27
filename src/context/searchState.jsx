@@ -41,6 +41,7 @@ const SearchState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("Error while loading new page");
     }
   };
@@ -74,6 +75,7 @@ const SearchState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("Error while loading new page");
     }
   };
@@ -101,6 +103,7 @@ const SearchState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("Could not filter", "danger");
     }
   };
@@ -131,6 +134,7 @@ const SearchState = (props) => {
       }
     } catch (error) {
       console.log(error);
+      props.setIsLoading(false);
       props.showAlert("Somethin wrong happene while searching", "danger");
     }
   };
