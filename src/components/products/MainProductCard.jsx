@@ -10,7 +10,7 @@ const MainProductCard = ({ product, showAlert }) => {
     <div className="rounded-lg shadow flex flex-col bg-slate-300/20 justify-between items-center p-3 gap-3">
       <div className="flex flex-col justify-center h-full">
         <img
-          src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`}
+          src={`/api/v1/product/product-photo/${product._id}`}
           alt={product.name}
           className="w-full"
         />

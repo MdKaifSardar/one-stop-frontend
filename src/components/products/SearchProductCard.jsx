@@ -10,7 +10,7 @@ const SearchProductCard = ({ product, showAlert }) => {
       <div className="flex felx-row justify-center items-center sm:w-[40vh] w-[30vh] h-full">
         <img
           className="w-full h-full"
-          src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`}
+          src={`/api/v1/product/product-photo/${product._id}`}
           alt={product.name}
         />
       </div>

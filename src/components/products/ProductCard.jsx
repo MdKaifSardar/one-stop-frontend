@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
       <div className="flex md:flex-row flex-col w-fit gap-3">
         <div className="p-2 flex flex-row md:w-32 justify-center items-center w-full h-full">
           <img
-            src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`}
+            src={`/api/v1/product/product-photo/${product._id}`}
             alt={product.name}
             className="md:w-full w-1/2"
           />
