@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import CategoryContext from "./categoryContext";
 
 const CategoryState = (props) => {
@@ -7,7 +6,7 @@ const CategoryState = (props) => {
   const [updateCategory, setUpdateCategory] = useState({ name: "", slug: "" });
   const [createdCat, setCreatedCat] = useState({ name: "", slug: "" });
   const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("user-id");
+  const userId = localStorage.getItem("userId");
   const [selectedCatId, setSelectedCatId] = useState(null);
   const [searchName, setSearchName] = useState("");
 
@@ -72,7 +71,10 @@ const CategoryState = (props) => {
 
   const editCategory = async (e) => {
     e.preventDefault();
-    const { name, slug } = updateCategory;
+    const {name} = updateCategory;
+    const catData = new FormData();
+    catData.append("name", name);
+    catData.append("userId", userId);
     try {
       props.setIsLoading(true);
       const response = await fetch(
@@ -81,9 +83,8 @@ const CategoryState = (props) => {
           method: "PUT",
           headers: {
             authorisation: token,
-            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name, slug, userId }),
+          body: catData,
         }
       );
       const json = await response.json();
@@ -105,6 +106,8 @@ const CategoryState = (props) => {
   };
 
   const deleteCategory = async (categoryId) => {
+    const catData = new FormData();
+    catData.append("userId", userId);
     try {
       props.setIsLoading(true);
       const response = await fetch(
@@ -112,10 +115,9 @@ const CategoryState = (props) => {
         {
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
             authorisation: token,
           },
-          body: JSON.stringify({ userId }),
+          body: catData,
         }
       );
 
@@ -140,6 +142,7 @@ const CategoryState = (props) => {
   return (
     <CategoryContext.Provider
       value={{
+        editCategory,
         createdCat,
         setCreatedCat,
         selectedCatId,
@@ -147,7 +150,6 @@ const CategoryState = (props) => {
         deleteCategory,
         showAllCategory,
         categories,
-        editCategory,
         updateCategory,
         createCategory,
         searchName,

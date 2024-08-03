@@ -6,10 +6,23 @@ import { Link, useParams } from "react-router-dom";
 
 const ProductPage = () => {
   const params = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const context = useContext(ProductContext);
-  const { getProduct, product, simmilarProducts, getSimilarProducts } = context;
+  const {
+    handleComment,
+    comment,
+    setComment,
+    getProduct,
+    product,
+    simmilarProducts,
+  } = context;
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleComment(product._id, product.slug);
+  }
+
+  
   useEffect(() => {
     getProduct(params.slug);
   }, []);
@@ -19,7 +32,7 @@ const ProductPage = () => {
         <div className="w-1/2 flex flex-col justify-center items-center h-full">
           <img
             className="h-full"
-            src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`}
+            src={`/api/v1/product/product-photo/${product._id}`}
             alt={product.name}
           />
         </div>
@@ -67,7 +80,7 @@ const ProductPage = () => {
               >
                 <img
                   className="h-[15vh] bg-blue-500"
-                  src={`http://localhost:8080/api/v1/product/product-photo/${product._id}`}
+                  src={`/api/v1/product/product-photo/${product._id}`}
                   alt={pro.name}
                 />
                 <div className="flex flex-col justify-between items-center h-full gap-3">
@@ -97,6 +110,35 @@ const ProductPage = () => {
             <p>No simmilar products to show</p>
           )}
         </div>
+      </div>
+      <div className="flex felx-col">
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col">
+            <label htmlFor="comment">type a comment</label>
+            <textarea
+              type="text"
+              name="comment"
+              onChange={(e) => setComment(e.target.value)}
+              value={comment}
+              id="comment"
+              className="form-control"
+            />
+          </div>
+          <button
+            type="submit"
+            className="p-2 bg-blue-500 text-white font-semibold font-sans"
+          >Comment</button>
+        </form>
+      </div>
+      <div className="flex flex-col justify-start items-start">
+        {
+          product.comments && product.comments.length ? product.comments.map((comment, index) => (
+            <div key={index} className="p-2 bg-slate-400/10 shadow-md flex flex-col justify-center items-center">
+              <span></span>
+              <span className="sm:text-md text-sm">{comment.comment}</span>
+            </div>
+          )): <p>No comments on this product yet</p>
+        }
       </div>
     </div>
   );

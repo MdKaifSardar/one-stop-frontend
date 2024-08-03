@@ -7,7 +7,14 @@ import { useNavigate } from "react-router-dom";
 const CartPage = ({ showAlert }) => {
   const navigate = useNavigate();
   const context = useContext(CartContext);
-  const { cart, totalPrice, setTotalPrice } = context;
+  const { cart, countTotalPrice, totalPrice } = context;
+  useEffect(() => {
+    countTotalPrice();
+  }, [cart]);
+
+  useEffect(() => {
+    console.log(totalPrice);
+  }, [totalPrice]);
   return (
     <div className="mb-10 p-2 mt-[75px] flex flex-col w-full justify-center items-center h-fit gap-3">
       <div className="sm:text-xl text-lg ">
@@ -26,7 +33,8 @@ const CartPage = ({ showAlert }) => {
             check out
           </span>
           <div>
-            <span>Total Price: $ {localStorage.getItem("totalPrice")}</span>
+            {/* <span>Total Price: $ {localStorage.getItem("totalPrice")}</span> */}
+            <span>Total Price: $ {totalPrice}</span>
           </div>
         </div>
       </div>

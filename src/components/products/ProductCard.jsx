@@ -2,11 +2,19 @@ import React, { useEffect } from "react";
 import { useContext } from "react";
 import ProductContext from "../../context/productContext";
 import { Link } from "react-router-dom";
+import SearchContext from "../../context/searchContext";
 
 const ProductCard = ({ product }) => {
   const context = useContext(ProductContext);
-  const { editProduct, setEditProduct, deleteProduct, setSelectedProId, showAllCategory } =
-    context;
+  const searchContext = useContext(SearchContext);
+  const {
+    setEditProduct,
+    deleteProduct,
+    setSelectedProId,
+    showAllCategory,
+  } = context;
+
+  const {searchProducts} = searchContext;
 
   useEffect(() => {
     showAllCategory();
@@ -45,8 +53,8 @@ const ProductCard = ({ product }) => {
           onClick={() => {
             setSelectedProId(product._id);
             setEditProduct({
-                ...product,
-                photo: "",
+              ...product,
+              photo: "",
             });
           }}
           className="p-2 bg-blue-500 shadow-md text-white hover:bg-blue-500/70"
@@ -55,7 +63,10 @@ const ProductCard = ({ product }) => {
           Edit
         </Link>
         <button
-          onClick={() => deleteProduct(product._id)}
+          onClick={() => {
+            deleteProduct(product._id);
+            searchProducts();
+          }}
           className="p-2 bg-red-500 shadow-md text-white hover:bg-red-500/70"
         >
           Delete

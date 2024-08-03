@@ -3,7 +3,7 @@ import UserMenu from '../../components/UserMenu';
 
 const Dashboard = () => {
   return (
-    <div className="mt-24 flex flex-row justify-center w-[100%] items-center">
+    <div className="mt-[58px] flex flex-row justify-center w-[100%] items-center">
         <UserMenu />
         <div className="flex flex-col w-full h-[100vh]">
         this is a div

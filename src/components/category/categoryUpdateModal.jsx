@@ -44,6 +44,7 @@ const CategoryUpdateModal = () => {
                     id="name"
                     value={updateCategory.name}
                     onChange={(e) => setUpdateCategory({
+                      ...updateCategory,
                       name: e.target.value
                     })}
                     className="form-control"

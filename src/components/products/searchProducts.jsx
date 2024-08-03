@@ -1,14 +1,26 @@
 import React, { useEffect } from "react";
 import { useContext } from "react";
 import SearchContext from "../../context/searchContext";
+import { useNavigate } from "react-router-dom";
 
 const SearchProducts = () => {
+  const navigate = useNavigate();
   const context = useContext(SearchContext);
   const { searchProducts, setKeyword, keyword } = context;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await searchProducts();
+    navigate("/search-products");
+  };
+
+  useEffect(() => {
+    searchProducts();
+  }, []);
   return (
     <form
       className="p-2 flex flex-row w-fit items-center h-fit"
-      onSubmit={searchProducts}
+      onSubmit={handleSubmit}
     >
       <div className="flex felx-row justify-center items-center">
         <input
@@ -28,7 +40,7 @@ const SearchProducts = () => {
           className="px-4 py-2 rounded-r-full bg-blue-500 text-white font-semibold"
           type="submit"
         >
-          <i className="fa-solid fa-magnifying-glass"/>
+          <i className="fa-solid fa-magnifying-glass" />
         </button>
       </div>
     </form>

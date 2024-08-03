@@ -9,7 +9,7 @@ const ProductState = (props) => {
   // const [productSlug, setProductSlug] = useState("");
   const [limit, setLimit] = useState(12);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("user-id");
+  const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
   const [selectCat, setSelectCat] = useState("");
   const [allProducts, setAllProducts] = useState([]);
@@ -18,6 +18,7 @@ const ProductState = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProd, setTotalProd] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [comment, setComment] = useState("");
   const [createProduct, setCreateProduct] = useState({
     name: "",
     description: "",
@@ -34,7 +35,7 @@ const ProductState = (props) => {
     quantity: 0,
     category: "",
     photo: "",
-    shipping: "",
+    shipping: true,
   });
   const [findProduct, setFindProduct] = useState({
     categoryId: "",
@@ -43,6 +44,35 @@ const ProductState = (props) => {
 
   const { categoryId, productName } = findProduct;
   const [previews, setPreviews] = useState([]);
+
+
+  const handleComment = async (productId, productSlug) => {
+    const user = userId;
+    try {
+      props.setIsLoading(true);
+      const response = await fetch(
+        `/api/v1/product/comments/${productId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({comment, user}),
+        }
+      );
+      const json = await response.json();
+      props.setIsLoading(false);
+      if (json.success) {
+        getProduct(productSlug);
+      } else {
+        props.showAlert(json.message, "danger");
+      }
+    } catch (error) {
+      console.log(error)
+      props.showAlert("Something went wrong", "danger");
+      props.setIsLoading(false);
+    }
+  };
 
   const getSimilarProducts = async (pId, cId) => {
     try {
@@ -272,7 +302,6 @@ const ProductState = (props) => {
       props.setIsLoading(false);
       if (json.success) {
         props.showAlert(json.message, "success");
-        ShowAllProducts();
       } else {
         props.showAlert(json.message, "danger");
       }
@@ -358,6 +387,9 @@ const ProductState = (props) => {
   return (
     <ProductContext.Provider
       value={{
+        handleComment,
+        comment, 
+        setComment,
         getSimilarProducts,
         simmilarProducts,
         product,

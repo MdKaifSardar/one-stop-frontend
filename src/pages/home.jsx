@@ -18,28 +18,17 @@ const Home = ({ products, showAlert }) => {
     handleChangeCat,
     setPrice,
     handleFilterProducts,
+    currentPage,
+    prevPage,
+    nextPage,
+    totalPages,
   } = filterContext;
   const productContext = useContext(ProductContext);
-  const {
-    totalPages,
-    currentPage,
-    ShowAllProducts,
-    showFirstPage,
-    nextPage,
-    prevPage,
-    showAllCategory,
-    categories,
-  } = productContext;
+  const { showAllCategory, categories } = productContext;
 
   useEffect(() => {
     showAllCategory();
   }, []);
-
-  useEffect(() => {
-    if (!cat.length && !price.length) {
-      showFirstPage();
-    }
-  }, [cat.length, price.length]);
 
   useEffect(() => {
     if (cat.length || price.length) {
@@ -56,7 +45,7 @@ const Home = ({ products, showAlert }) => {
             {categories && categories.length ? (
               categories.map((cat, index) => (
                 <Checkbox
-                  key={cat._id}
+                  key={index}
                   onChange={(e) =>
                     handleChangeCat(e.target.checked, cat._id, cat.name)
                   }
@@ -137,30 +126,32 @@ const Home = ({ products, showAlert }) => {
               <p>no products found</p>
             )}
           </div>
-        </div>
-        {!cat.length && !price.length ? (
-          <div className="flex flex-row justify-center items-center gap-3">
-            <button
-              disabled={currentPage === 1}
-              onClick={prevPage}
-              className="hover:bg-slate-300/20 rounded-full gap-2 flex flex-row justify-center items-center p-2 text-black sm:text-md text-center"
-            >
-              <i className="fa-solid fa-arrow-left"></i>
-              <span>Prev</span>
-            </button>
-            <div className="flexw justify-center items-center text-center flex-rotext-black font-sans text-xl rounded-full p-2 h-10 w-10 shadow-md">
-              {currentPage}
-            </div>
-            <button
-              disabled={currentPage === totalPages}
-              onClick={nextPage}
-              className="hover:bg-slate-300/20 rounded-full gap-2 flex flex-row justify-center items-center p-2 text-black sm:text-md text-center"
-            >
-              <span>Next</span>
-              <i className="fa-solid fa-arrow-right"></i>
-            </button>
+          <div>
+            {totalPages ? (
+              <div className="flex flex-row justify-center items-center p-2">
+                <button
+                  disabled={currentPage === 1}
+                  onClick={prevPage}
+                  className="hover:bg-slate-300/20 rounded-full gap-2 flex flex-row justify-center items-center p-2 text-black sm:text-md text-center"
+                >
+                  <i className="fa-solid fa-arrow-left"></i>
+                  <span>Prev</span>
+                </button>
+                <div className="flexw justify-center items-center text-center flex-rotext-black font-sans text-xl rounded-full p-2 h-10 w-10 shadow-md">
+                  {currentPage}
+                </div>
+                <button
+                  disabled={currentPage === totalPages}
+                  onClick={nextPage}
+                  className="hover:bg-slate-300/20 rounded-full gap-2 flex flex-row justify-center items-center p-2 text-black sm:text-md text-center"
+                >
+                  <span>Next</span>
+                  <i className="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            ) : null}
           </div>
-        ) : null}
+        </div>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import { Radio } from "antd";
 const SearchProductsPage = ({ showAlert }) => {
   const context = useContext(SearchContext);
   const {
-    filterProducts,
+    searchProducts,
     foundProd,
     totalPages,
     currentPage,
@@ -19,7 +19,7 @@ const SearchProductsPage = ({ showAlert }) => {
   } = context;
 
   useEffect(() => {
-    filterProducts();
+    searchProducts();
   }, [price]);
 
   return (

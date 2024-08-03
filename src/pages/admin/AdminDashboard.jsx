@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   const {
   } = context;
   return (
-    <div className="mt-24 flex flex-row w-[100%] h-fit mb-10">
+    <div className="mt-[58px] flex flex-row w-[100%] h-fit mb-10">
       <AdminMenu />
       <div className="flex flex-col items-start w-full h-fit">
         <AdminDetails />

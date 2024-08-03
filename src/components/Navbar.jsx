@@ -9,22 +9,27 @@ import CategoryContext from "../context/categoryContext";
 import FilterContext from "../context/filterContext";
 import CartContext from "../context/cartContext";
 import { Badge } from "antd";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const location = useLocation();
   const cartContext = useContext(CartContext);
   const { cart } = cartContext;
   const filterContext = useContext(FilterContext);
   const { setCat } = filterContext;
   const catContext = useContext(CategoryContext);
   const { showAllCategory, categories } = catContext;
-  const role = localStorage.getItem("role");
   const context = useContext(AuthContext);
-  const { auth, logout } = context;
+  const { auth, getUserDetails, logout } = context;
   const [isOpen, setIsOpen] = useState(false);
   const [profileIsOpen, setProfileIsOpen] = useState(false);
   const [catList, setCatList] = useState(false);
+  const {date} = auth;
+  const dateNew = new Date(date);
+
   useEffect(() => {
     showAllCategory();
+    getUserDetails();
   }, []);
 
   const handleOnClick = () => {
@@ -141,12 +146,14 @@ const Navbar = () => {
         </nav>
       </div>
       <div className="flex flex-row items-center sm:gap-3 gap-2">
+      {!location.pathname.startsWith('/dashboard') && (
         <nav>
           <SearchProducts />
         </nav>
+      )}
         <nav>
           <div className="p-2 flex flex-row hover:cursor-pointer hover:text-blue-500 justify-center items-center rounded-full">
-            <Link to={`/cart/${role === "1" ? "admin" : "user"}`}>
+            <Link to={`/cart/${auth.role === "1" ? "admin" : "user"}`}>
               <Badge
                 offset={[6, -6]}
                 size="default"
@@ -199,21 +206,19 @@ const Navbar = () => {
                   <span className="sm:text-lg text-sm font-semibold font-sans">
                     Username:{" "}
                   </span>
-                  {localStorage.getItem("user_name")}
+                  <span>{auth.name}</span>
                 </span>
                 <span className="sm:text-lg text-sm flex flex-wrap">
                   <span className="sm:text-lg text-sm font-semibold font-sans">
                     Email:{" "}
                   </span>
-                  {localStorage.getItem("user_email")}
+                  <span>{auth.email}</span>
                 </span>
                 <span className="sm:text-lg text-sm flex flex-wrap">
                   <span className="sm:text-lg text-sm font-semibold font-sans">
                     Date Created:
                   </span>
-                  {localStorage.getItem("user_day")}/
-                  {localStorage.getItem("user_month")}/
-                  {localStorage.getItem("user_year")}
+                  <span>{dateNew.getDate()}/{dateNew.getMonth()}/{dateNew.getFullYear()}</span>
                 </span>
                 <div className="flex flex-row justify-center items-center gap-1">
                   <button
@@ -223,7 +228,7 @@ const Navbar = () => {
                     logout
                   </button>
                   <Link
-                    to={`/dashboard/${role === "1" ? "admin" : "user"}`}
+                    to={`/dashboard/${auth.role == 1 ? "admin" : "user"}`}
                     className="p-2 w-fit h-fit border-1 border-blue-500 text-blue-500 font-semibold font-sans rounded-xl shadow hover:border-blue-500/70 hover:text-blue-400"
                   >
                     Dashboard

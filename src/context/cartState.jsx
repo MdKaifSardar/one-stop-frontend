@@ -45,6 +45,7 @@ const CartState = (props) => {
   return (
     <CartContext.Provider
       value={{
+        countTotalPrice,
         isAdded,
         addToCart,
         cart,

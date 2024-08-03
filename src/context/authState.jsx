@@ -3,11 +3,16 @@ import AuthContext from "./authContext";
 import { useNavigate } from "react-router-dom";
 
 const AuthState = (props) => {
-  let location = useNavigate()
+  let location = useNavigate();
   const [auth, setAuth] = useState({
-    user: {},
-    token: "",
-  })
+    name: "",
+    address: "",
+    email: "",
+    phone: "",
+    role: 0,
+    date: "",
+    id: "",
+  });
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -20,21 +25,43 @@ const AuthState = (props) => {
   let navigate = useNavigate();
 
   // getting the user details:
-  const getUserDetails = (json) => {
-    const { name, email, address, phone, date } = json;
-    localStorage.setItem("user_name", name);
-    localStorage.setItem("user_email", email);
-    localStorage.setItem("user_phone", phone);
-    localStorage.setItem("user_address", address);
-    const userDate = new Date(date);
-    const year = userDate.getUTCFullYear();
-    const month = userDate.getMonth();
-    const day = userDate.getDate();
-    localStorage.setItem("user_year", year);
-    localStorage.setItem("user_month", month);
-    localStorage.setItem("user_day", day);
+  const getUserDetails = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return;
+    }
+    try {
+      props.setIsLoading(true);
+      const response = await fetch("/api/v1/auth/get-user-details", {
+        method: "GET",
+        headers: {
+          authorisation: token,
+        },
+      });
+
+      const json = await response.json();
+      const user = json.user;
+      props.setIsLoading(false);
+      if (json.success) {
+        setAuth({
+          name: user.name,
+          address: user.address,
+          email: user.email,
+          phone: user.phone,
+          role: user.role,
+          date: user.createdAt,
+          id: user._id,
+        });
+      } else {
+        props.showAlert("Something went wrong", "danger");
+      }
+    } catch (error) {
+      console.log(error);
+      props.showAlert("Something went wrong", "danger");
+      props.setIsLoading(false);
+    }
   };
-  
+
   const logout = () => {
     localStorage.clear();
     navigate("/login");
@@ -54,16 +81,10 @@ const AuthState = (props) => {
     if (json.success) {
       props.showAlert("Succesfully logged into your account", "success");
       localStorage.setItem("token", json.authToken);
-      localStorage.setItem("role", json.user.role);
-      localStorage.setItem("user-id", json.user.id);
-      localStorage.setItem("cart", JSON.stringify([]));
-      setAuth({
-        user: json.user,
-        token: json.authToken,
-      })
-      getUserDetails(json.user);
+      localStorage.setItem("userId", json.user.id);
+      getUserDetails();
       setCredentials({});
-      navigate(location.state || "/");
+      navigate("/");
     }
     if (!json.success) {
       props.showAlert(json.message, "danger");
@@ -85,15 +106,9 @@ const AuthState = (props) => {
     if (json.success) {
       props.showAlert("Succesfully signed up", "success");
       localStorage.setItem("token", json.authToken);
-      localStorage.setItem("role", json.user.role);
-      localStorage.setItem("user-id", json.user.id);
-      localStorage.setItem("cart", JSON.stringify([]));
-      setAuth({
-        user: json.user,
-        token: json.authToken,
-      })
+      localStorage.setItem("userId", json.user.id);
       setCredentials({});
-      getUserDetails(json.user);
+      getUserDetails();
       navigate("/");
     }
     if (!json.success) {
@@ -127,7 +142,7 @@ const AuthState = (props) => {
     if (!json.success) {
       props.showAlert(json.error, "danger");
     }
-  }
+  };
   return (
     <AuthContext.Provider
       value={{
