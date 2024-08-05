@@ -87,13 +87,13 @@ const SearchState = (props) => {
     try {
       props.setIsLoading(true);
       const response = await fetch(
-        `/api/v1/product/search-product/${keyword}?page=1&limit=${limit}`,
+        `/api/v1/product/search-product?page=1&limit=${limit}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ price, cat }),
+          body: JSON.stringify({ keyword, price, cat }),
         }
       );
       const json = await response.json();
