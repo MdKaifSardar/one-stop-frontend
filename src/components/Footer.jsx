@@ -14,11 +14,9 @@ const Footer = () => {
             To The Top
         </button>
         <div className='text-center py-2 w-full bg-slate-500/50 sm:text-2xl text-lg font-semibold font-sans text-white'>
-            All right reserved &copy; TeamName
+            All right reserved &copy; OneStop
         </div>
         <div className='py-4 bg-gradient-to-t from-slate-600 to-slate-400 w-full flex flex-row justify-evenly items-start'>
-            <div className='flex flex-col justify-center items-center gap-2'>
-            </div>
             <div className='flex flex-col justify-center items-center gap-2'>
                 <div className='heading-footer'>Contact Us</div>
                 <Link to="/contact" className='footer-small-text'>Contact</Link>
