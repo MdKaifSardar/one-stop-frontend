@@ -10,7 +10,7 @@ const CartItem = ({ item }) => {
     <div className="rounded-lg shadow flex flex-col bg-slate-300/20 justify-between items-center p-3 gap-3 md:w-1/2 w-full">
       <div className="flex flex-col justify-center h-full">
         <img
-          src={`http://localhost:8080/api/v1/product/product-photo/${item._id}`}
+          src={`/api/v1/product/product-photo/${item._id}`}
           alt={item.name}
           className="w-full"
         />

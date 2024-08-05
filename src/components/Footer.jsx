@@ -18,12 +18,6 @@ const Footer = () => {
         </div>
         <div className='py-4 bg-gradient-to-t from-slate-600 to-slate-400 w-full flex flex-row justify-evenly items-start'>
             <div className='flex flex-col justify-center items-center gap-2'>
-                <div className='heading-footer'>Meet the team</div>
-                <div className='footer-small-text'>Durgeshwar Kumar</div>
-                <div className='footer-small-text'>Md Kaif Sardar</div>
-                <div className='footer-small-text'>Sourashmi Das</div>
-                <div className='footer-small-text'>Supratim Mondal</div>
-                <div className='footer-small-text'>Rupam Sarkar</div>
             </div>
             <div className='flex flex-col justify-center items-center gap-2'>
                 <div className='heading-footer'>Contact Us</div>
