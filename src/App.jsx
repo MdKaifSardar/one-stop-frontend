@@ -124,7 +124,7 @@ const App = () => {
                         />
                         <Route
                           path="admin/show-product"
-                          element={<ShowProduct products={products} />}
+                          element={<ShowProduct />}
                         />
                         <Route
                           path="admin/product-update"

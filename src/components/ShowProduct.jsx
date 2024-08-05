@@ -7,11 +7,12 @@ import ProductCard from "./products/ProductCard";
 import FindProductsForm from "./products/FindProductsForm";
 import SearchContext from "../context/searchContext";
 
-const ShowProduct = ({ products }) => {
+const ShowProduct = () => {
   const context = useContext(ProductContext);
   const { showAllCategory } = context;
   const searchContext = useContext(SearchContext);
   const {
+    setKeyword,
     totalProducts,
     searchProducts,
     currentPage,
@@ -22,6 +23,7 @@ const ShowProduct = ({ products }) => {
   } = searchContext;
 
   useEffect(() => {
+    setKeyword("");
     showAllCategory();
     searchProducts();
   }, []);

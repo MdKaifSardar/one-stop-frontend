@@ -7,7 +7,7 @@ import AuthContext from "../../context/authContext";
 
 const AdminRoute = () => {
   const context = useContext(AuthContext);
-  const { auth, getUserDetails } = context;
+  const { getUserDetails } = context;
   const [ok, setOk] = useState(false);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");

@@ -33,7 +33,7 @@ const FindProductsForm = () => {
           onChange={(value) => setCat(value)}
           placeholder="Select Category"
         >
-          <Option value="all">All Category</Option>
+          <Option value="">All Category</Option>
           {categories && categories.length
             ? categories.map((cat, index) => (
                 <Option key={index} value={cat._id}>
